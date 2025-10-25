@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TypeScript Uzay Oyunu (HTML ve CDN)</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+    </style>
+    <script src="https://unpkg.com/typescript@5.2.2/lib/typescript.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/system.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+</head>
+<body>
+    <div id="game-container"></div>
+    
+    <script>
+        // SystemJS ve TypeScript'i, Phaser'ı bir modül olarak yüklemek üzere yapılandırma
+        System.config({
+            transpiler: 'typescript',
+            typescriptOptions: {
+                module: "system",
+                target: "es6",
+                sourceMap: true,
+                lib: ["es2015", "dom"]
+            },
+            map: {
+                'typescript': 'https://unpkg.com/typescript@5.2.2/lib/typescript.js',
+                'phaser': 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js'
+            }
+        });
+        
+        // Oyun kodunu içeren dosyayı SystemJS ile yükle
+        System.import('./game.ts');
+    </script>
+</body>
+</html>
